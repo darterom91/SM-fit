@@ -67,3 +67,34 @@ function ctp_contenido() {
   }
 }
 add_action( 'init', 'ctp_contenido', 0 );
+
+add_action( 'init', 'create_tipo_contenido', 0 );
+
+// Creamos dos taxonomías, género y autor para el custom post type "libro"
+function create_tipo_contenido() {
+  /* Configuramos las etiquetas que mostraremos en el escritorio de WordPress */
+  $labels = array(
+    'name'             => _x( 'Tipo de contenidos', 'taxonomy general name' ),
+    'singular_name'    => _x( 'tipo de contenido', 'taxonomy singular name' ),
+    'search_items'     =>  __( 'Buscar por Tipo de contenido' ),
+    'all_items'        => __( 'Todos los Tipos de contenidos' ),
+    'parent_item'      => __( 'Tipo de contenido padre' ),
+    'parent_item_colon'=> __( 'Tipo de contenido padre:' ),
+    'edit_item'        => __( 'Editar Tipo de contenido' ),
+    'update_item'      => __( 'Actualizar Tipo de contenido' ),
+    'add_new_item'     => __( 'Añadir nuevo Tipo de contenido' ),
+    'new_item_name'    => __( 'Nombre del nuevo Tipo de contenido' ),
+  );
+
+  /* Registramos la taxonomía y la configuramos como jerárquica (al estilo de las categorías) */
+  register_taxonomy( 'tipo_de_contenido', array( 'contenido' ), array(
+    'hierarchical'       => true,
+    'labels'             => $labels,
+    'show_ui'            => true,
+		'show_in_nav_menus'  => true,
+    'query_var'          => true,
+    'rewrite'            => array( 'slug' => 'tipo_de_contenido' ),
+  ));
+
+  /* Si quieres añadir la siguiente taxonomía del ejemplo, sustituye esta línea por la del código correspondiente */
+}

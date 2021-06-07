@@ -68,6 +68,27 @@ get_header();
 				<?php if ( $archive_subtitle ) { ?>
 					<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
 				<?php } ?>
+				
+				<ul>
+					<h4><?php $args = array(
+					'post_type' => 'contenido', // if you want to further filter by post_type
+					'tax_query' => array(
+							array(
+							'taxonomy' => 'tipo_de_contenido',
+							'field' => 'slug',
+							'terms' => single_term_title() // you need to know the term_id of your term "example 1"
+							)
+						)
+					);?></h4>
+					<?php $the_query = new WP_Query( $args ); ?>
+					<?php while ($the_query -> have_posts()) : $the_query -> the_post(); ?>
+					<li>
+						<a href="<?php the_permalink(); ?>"><?php if ( get_tex ) { the_post_thumbnail( '' ); } ?></a>
+						<h3><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+						<p><?php the_excerpt(); ?></p>
+					</li>
+					<?php endwhile;?>
+				</ul>
 
 			</div><!-- .archive-header-inner -->
 
