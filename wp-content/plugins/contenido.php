@@ -98,3 +98,4 @@ function create_tipo_contenido() {
 
   /* Si quieres añadir la siguiente taxonomía del ejemplo, sustituye esta línea por la del código correspondiente */
 }
+// shortcode 
